@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { Product } from './models/product';
+import { ProductService } from './services/product.service';
 
 @Component({
   selector: 'app-root',
@@ -10,25 +12,19 @@ import { RouterOutlet } from '@angular/router';
   styleUrl: './app.component.css',
 })
 export class AppComponent {
-  products = [
-    {
-      name: 'Product 1',
-      price: 10,
-      category: 'Electronics',
-      description: 'This is a product description',
-    },
-    {
-      name: 'Product 2',
-      price: 20,
-      category: 'Electronics',
-      description: 'This is a product description',
-    },
-    {
-      name: 'Product 3',
-      price: 30,
-      category: 'Electronics',
-      description: 'This is a product description',
-    },
-  ];
+  constructor(private productService: ProductService) {}
+
   title = 'frontend';
+
+  products: Product[] = [];
+
+  ngOnInit(): void {
+    this.getProducts();
+  }
+
+  getProducts(): void {
+    this.productService.getProducts().subscribe((products) => {
+      this.products = products;
+    });
+  }
 }
