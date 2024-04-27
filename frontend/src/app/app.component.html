@@ -1,1 +1,34 @@
-<p class="text-green-500">app works!</p>
+<div class="flex min-h-screen flex-col divide-y bg-neutral-100 px-10 py-5">
+  <div class="flex flex-col gap-4 px-4 py-8">
+    <h2 class="text-2xl font-bold">Read Products</h2>
+    <div class="rounded border border-slate-400 shadow-lg">
+      <table class="w-full">
+        <thead>
+          <tr>
+            <th class="px-2 py-4">Name</th>
+            <th class="px-2 py-4">Price</th>
+            <th class="px-2 py-4">Category</th>
+            <th class="px-2 py-4">Description</th>
+            <th class="px-2 py-4">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (product of products; track product) {
+            <tr>
+              <td class="px-2 py-3">{{ product.name }}</td>
+              <td class="px-2 py-3">
+                {{ product.price / 100 | currency: "EUR" }}
+              </td>
+              <td class="px-2 py-3">{{ product.category }}</td>
+              <td class="px-2 py-3">{{ product.description }}</td>
+              <td class="px-2 py-3"></td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="px-4 py-8">
+    <h2 class="text-2xl font-bold">Create Product</h2>
+  </div>
+</div>
