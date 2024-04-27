@@ -5,6 +5,11 @@
 -   [x] Initialise Frontend
 -   [x] Initialise Backend
 -   [ ] Backend API
+    -   [x] List products
+    -   [x] Add product
+    -   [ ] Update product
+    -   [x] Delete product
+-   [ ] Frontend
     -   [ ] List products
     -   [ ] Add product
     -   [ ] Update product
