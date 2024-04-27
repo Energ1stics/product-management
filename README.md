@@ -3,11 +3,13 @@
 ## TODO
 
 -   [x] Initialise Frontend
--   [ ] Initialise Backend
--   [ ] List products
--   [ ] Add product
--   [ ] Update product
--   [ ] Delete product
+-   [x] Initialise Backend
+-   [ ] Backend API
+    -   [ ] List products
+    -   [ ] Add product
+    -   [ ] Update product
+    -   [ ] Delete product
+-   [ ] Cleanup unused backend code from scaffolding
 
 ## Requirements
 
