@@ -11,7 +11,7 @@
         "tags": [
           "Products"
         ],
-        "operationId": "GetProducts",
+        "operationId": "GetAllProducts",
         "responses": {
           "200": {
             "description": "",
