@@ -2,7 +2,7 @@
 
 ## TODO
 
--   [ ] Initialise Frontend
+-   [x] Initialise Frontend
 -   [ ] Initialise Backend
 -   [ ] List products
 -   [ ] Add product
