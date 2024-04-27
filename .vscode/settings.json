@@ -1,0 +1,14 @@
+{
+    "files.associations": {
+        "*.css": "tailwindcss"
+    },
+    "tailwindCSS.classAttributes": [
+        "class",
+        "className",
+        "ngClass",
+        ".*Styles.*"
+    ],
+    "editor.quickSuggestions": {
+        "strings": "on"
+    }
+}
