@@ -27,4 +27,10 @@ export class AppComponent {
       this.products = products;
     });
   }
+
+  deleteProduct(product: Product): void {
+    this.productService.deleteProduct(product).subscribe(() => {
+      this.getProducts();
+    });
+  }
 }

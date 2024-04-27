@@ -21,7 +21,9 @@
               </td>
               <td class="px-4 py-4">{{ product.category }}</td>
               <td class="px-4 py-4">{{ product.description }}</td>
-              <td class="px-4 py-4"></td>
+              <td class="px-4 py-4">
+                <button (click)="deleteProduct(product)">Delete</button>
+              </td>
             </tr>
           }
         </tbody>
