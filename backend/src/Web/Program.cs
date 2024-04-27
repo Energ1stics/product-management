@@ -8,6 +8,7 @@ builder.Services.AddKeyVaultIfConfigured(builder.Configuration);
 builder.Services.AddApplicationServices();
 builder.Services.AddInfrastructureServices(builder.Configuration);
 builder.Services.AddWebServices();
+builder.Services.AddCors();
 
 var app = builder.Build();
 
@@ -26,6 +27,14 @@ app.UseHealthChecks("/health");
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
+app.UseCors(config =>
+{
+    config
+        .WithOrigins("http://localhost:4200")
+        .AllowAnyHeader()
+        .AllowAnyMethod();
+});
+
 app.UseSwaggerUi(settings =>
 {
     settings.Path = "/api";
@@ -34,7 +43,8 @@ app.UseSwaggerUi(settings =>
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller}/{action=Index}/{id?}");
+    pattern: "{controller}/{action=Index}/{id?}"
+);
 
 app.MapRazorPages();
 
