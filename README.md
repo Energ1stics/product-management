@@ -10,10 +10,10 @@
     -   [ ] Update product
     -   [x] Delete product
 -   [ ] Frontend
-    -   [ ] List products
+    -   [x] List products
     -   [ ] Add product
     -   [ ] Update product
-    -   [ ] Delete product
+    -   [x] Delete product
 -   [ ] Cleanup unused backend code from scaffolding
 
 ## Requirements
