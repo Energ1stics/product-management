@@ -1,36 +1,14 @@
-import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { Product } from './models/product';
-import { ProductService } from './services/product.service';
+import { ReadProductsComponent } from './components/read-products/read-products.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, CommonModule],
+  imports: [RouterOutlet, ReadProductsComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
 export class AppComponent {
-  constructor(private productService: ProductService) {}
-
   title = 'frontend';
-
-  products: Product[] = [];
-
-  ngOnInit(): void {
-    this.getProducts();
-  }
-
-  getProducts(): void {
-    this.productService.getProducts().subscribe((products) => {
-      this.products = products;
-    });
-  }
-
-  deleteProduct(product: Product): void {
-    this.productService.deleteProduct(product).subscribe(() => {
-      this.getProducts();
-    });
-  }
 }
