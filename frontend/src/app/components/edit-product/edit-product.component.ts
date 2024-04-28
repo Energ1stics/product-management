@@ -6,7 +6,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { ActivatedRoute, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { ProductService } from '../../services/product.service';
 
 @Component({
@@ -21,6 +21,7 @@ export class EditProductComponent implements OnInit {
     private formBuilder: FormBuilder,
     private productService: ProductService,
     private route: ActivatedRoute,
+    private router: Router,
   ) {}
 
   apiPending = false;
@@ -44,10 +45,13 @@ export class EditProductComponent implements OnInit {
     description: new FormControl(''),
   });
 
+  originalProductName = '';
+
   ngOnInit() {
     const productId = parseInt(this.route.snapshot.paramMap.get('id') || '');
     this.productService.getProduct(productId).subscribe((product) => {
       this.productForm.patchValue(product);
+      this.originalProductName = product.name;
     });
   }
 
@@ -56,5 +60,22 @@ export class EditProductComponent implements OnInit {
       this.productForm.markAllAsTouched();
       return;
     }
+
+    this.productForm.markAsUntouched();
+    this.apiPending = true;
+
+    this.productService
+      .updateProduct(this.productForm.getRawValue())
+      .subscribe({
+        error: () => {
+          this.apiPending = false;
+          this.apiError = true;
+        },
+        complete: () => {
+          this.apiError = false;
+          this.apiPending = false;
+          this.router.navigate(['/products']);
+        },
+      });
   }
 }
