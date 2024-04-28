@@ -92,7 +92,11 @@ You can now visit the frontend at http://localhost:4200 and play around.
 
 ### Docker
 
-From root folder, run `docker compose up -d` to create and start a multicontainer in detached mode.
+From the root folder, run `docker compose up -d` to create and start a multicontainer in detached mode. This can take some time.
+
+After the containers are up and running, you can visit the frontend at http://localhost:4200 and play around. The Swagger UI is available at http://localhost:5000.
+
+In docker mode are currently no categories seeded and none can be created. Thus no products can be added.
 
 ## Problems
 
@@ -100,7 +104,3 @@ From root folder, run `docker compose up -d` to create and start a multicontaine
 -   Angular sources are scarce
 -   Personal preferences towards tailwind and good looking ui took a lot of time
 -   Docker backend container fails to connect to database
-
-```
-
-```
