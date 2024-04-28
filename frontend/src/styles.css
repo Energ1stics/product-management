@@ -9,3 +9,7 @@ th {
 input {
   outline: none;
 }
+
+select {
+  outline: none;
+}
