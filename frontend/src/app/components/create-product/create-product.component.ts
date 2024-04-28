@@ -2,11 +2,14 @@ import { Component } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
+  FormGroup,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
 import { ProductService } from '../../services/product.service';
 import { CommonModule } from '@angular/common';
+import { CategoryService } from '../../services/category.service';
+import { Category } from '../../models/category';
 
 @Component({
   selector: 'app-create-product',
@@ -19,7 +22,16 @@ export class CreateProductComponent {
   constructor(
     private formBuilder: FormBuilder,
     private productService: ProductService,
+    private categoryService: CategoryService,
   ) {}
+
+  categories: Category[] = [];
+
+  ngOnInit() {
+    this.categoryService.getCategories().subscribe((categories) => {
+      this.categories = categories;
+    });
+  }
 
   apiPending = false;
   apiError = false;
@@ -36,6 +48,12 @@ export class CreateProductComponent {
     price: new FormControl(0, {
       nonNullable: true,
       validators: [Validators.required, Validators.min(1)],
+    }),
+    category: new FormGroup({
+      id: new FormControl(-1, {
+        nonNullable: true,
+        validators: [Validators.required, Validators.min(0)],
+      }),
     }),
     description: new FormControl(''),
   });

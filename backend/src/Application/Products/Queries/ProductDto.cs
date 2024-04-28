@@ -1,3 +1,4 @@
+using backend.Application.Categories;
 using backend.Domain.Entities;
 
 namespace backend.Application.Products.Queries;
@@ -10,7 +11,9 @@ public class ProductDto
 
     public string? Description { get; init; }
 
-    public long Price { get; init; }
+    public long? Price { get; init; }
+
+    public CategoryDto? Category { get; init; }
 
     private class Mapping : Profile
     {

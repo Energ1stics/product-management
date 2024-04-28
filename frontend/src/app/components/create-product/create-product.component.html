@@ -34,6 +34,25 @@
         name="price"
         formControlName="price"
       />
+      <label for="category" class="flex gap-5">
+        <span class="grow basis-1 font-semibold">Category</span>
+      </label>
+      <div formGroupName="category" class="col-span-3 grow">
+        <select
+          class="h-full w-full rounded border p-2"
+          [ngClass]="{
+            'border-red-500':
+              productForm.controls.category.controls.id.touched &&
+              productForm.controls.category.controls.id.errors
+          }"
+          formControlName="id"
+        >
+          <option value="-1">Select Category</option>
+          <option *ngFor="let category of categories" [value]="category.id">
+            {{ category.name }}
+          </option>
+        </select>
+      </div>
       <label for="description" class="flex gap-5">
         <span class="grow basis-1 font-semibold">Description</span>
       </label>

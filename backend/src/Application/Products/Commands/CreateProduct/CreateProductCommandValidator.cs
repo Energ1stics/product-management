@@ -22,6 +22,8 @@ public class CreateProductCommandValidator
         RuleFor(p => p.Price).NotNull().GreaterThan(0);
 
         RuleFor(p => p.Description).MaximumLength(500);
+
+        RuleFor(p => p.Category).NotNull();
     }
 
     public async Task<bool> BeUniqueName(

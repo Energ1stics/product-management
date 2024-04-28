@@ -1,3 +1,5 @@
+using backend.Application.Categories;
+
 namespace backend.Application.Products.Commands.UpdateProduct;
 
 public record UpdateProductCommand : IRequest
@@ -9,4 +11,6 @@ public record UpdateProductCommand : IRequest
     public long? Price { get; init; }
 
     public string? Description { get; init; }
+
+    public CategoryDto? Category { get; init; }
 }

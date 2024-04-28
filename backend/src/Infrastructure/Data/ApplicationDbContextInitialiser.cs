@@ -16,7 +16,8 @@ public static class InitialiserExtensions
     {
         using var scope = app.Services.CreateScope();
 
-        var initialiser = scope.ServiceProvider.GetRequiredService<ApplicationDbContextInitialiser>();
+        var initialiser =
+            scope.ServiceProvider.GetRequiredService<ApplicationDbContextInitialiser>();
 
         await initialiser.InitialiseAsync();
 
@@ -31,7 +32,12 @@ public class ApplicationDbContextInitialiser
     private readonly UserManager<ApplicationUser> _userManager;
     private readonly RoleManager<IdentityRole> _roleManager;
 
-    public ApplicationDbContextInitialiser(ILogger<ApplicationDbContextInitialiser> logger, ApplicationDbContext context, UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
+    public ApplicationDbContextInitialiser(
+        ILogger<ApplicationDbContextInitialiser> logger,
+        ApplicationDbContext context,
+        UserManager<ApplicationUser> userManager,
+        RoleManager<IdentityRole> roleManager
+    )
     {
         _logger = logger;
         _context = context;
@@ -47,7 +53,10 @@ public class ApplicationDbContextInitialiser
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "An error occurred while initialising the database.");
+            _logger.LogError(
+                ex,
+                "An error occurred while initialising the database."
+            );
             throw;
         }
     }
@@ -60,7 +69,10 @@ public class ApplicationDbContextInitialiser
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "An error occurred while seeding the database.");
+            _logger.LogError(
+                ex,
+                "An error occurred while seeding the database."
+            );
             throw;
         }
     }
@@ -76,32 +88,68 @@ public class ApplicationDbContextInitialiser
         }
 
         // Default users
-        var administrator = new ApplicationUser { UserName = "administrator@localhost", Email = "administrator@localhost" };
+        var administrator = new ApplicationUser
+        {
+            UserName = "administrator@localhost",
+            Email = "administrator@localhost"
+        };
 
         if (_userManager.Users.All(u => u.UserName != administrator.UserName))
         {
             await _userManager.CreateAsync(administrator, "Administrator1!");
             if (!string.IsNullOrWhiteSpace(administratorRole.Name))
             {
-                await _userManager.AddToRolesAsync(administrator, new [] { administratorRole.Name });
+                await _userManager.AddToRolesAsync(
+                    administrator,
+                    new[] { administratorRole.Name }
+                );
             }
         }
 
         // Default data
         // Seed, if necessary
+        if (!_context.Categories.Any())
+        {
+            _context.Categories.Add(new Category { Name = "Miscallaneous" });
+            _context.Categories.Add(new Category { Name = "Food" });
+            _context.Categories.Add(new Category { Name = "Clothing" });
+            _context.Categories.Add(new Category { Name = "Electronics" });
+            _context.Categories.Add(new Category { Name = "Books" });
+            _context.Categories.Add(new Category { Name = "Toys" });
+            _context.Categories.Add(new Category { Name = "Music" });
+            _context.Categories.Add(new Category { Name = "Movies" });
+            _context.Categories.Add(new Category { Name = "Video Games" });
+            _context.Categories.Add(new Category { Name = "Sports" });
+            _context.Categories.Add(new Category { Name = "Health" });
+            _context.Categories.Add(new Category { Name = "Beauty" });
+            _context.Categories.Add(new Category { Name = "Home" });
+            _context.Categories.Add(new Category { Name = "Pets" });
+
+            await _context.SaveChangesAsync();
+        }
+
         if (!_context.TodoLists.Any())
         {
-            _context.TodoLists.Add(new TodoList
-            {
-                Title = "Todo List",
-                Items =
+            _context.TodoLists.Add(
+                new TodoList
                 {
-                    new TodoItem { Title = "Make a todo list 📃" },
-                    new TodoItem { Title = "Check off the first item ✅" },
-                    new TodoItem { Title = "Realise you've already done two things on the list! 🤯"},
-                    new TodoItem { Title = "Reward yourself with a nice, long nap 🏆" },
+                    Title = "Todo List",
+                    Items =
+                    {
+                        new TodoItem { Title = "Make a todo list 📃" },
+                        new TodoItem { Title = "Check off the first item ✅" },
+                        new TodoItem
+                        {
+                            Title =
+                                "Realise you've already done two things on the list! 🤯"
+                        },
+                        new TodoItem
+                        {
+                            Title = "Reward yourself with a nice, long nap 🏆"
+                        },
+                    }
                 }
-            });
+            );
 
             await _context.SaveChangesAsync();
         }

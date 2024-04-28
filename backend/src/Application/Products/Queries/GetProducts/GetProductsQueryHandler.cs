@@ -24,7 +24,9 @@ public class GetProductsQueryHandler
     )
     {
         return await _context
-            .Products.OrderBy(p => p.Name)
+            .Products.Include(p => p.Category)
+            .OrderBy(p => p.Name)
+            .AsNoTracking()
             .ProjectTo<ProductDto>(_mapper.ConfigurationProvider)
             .ToListAsync(cancellationToken);
     }

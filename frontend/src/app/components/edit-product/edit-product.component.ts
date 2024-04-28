@@ -3,11 +3,14 @@ import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
+  FormGroup,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { ProductService } from '../../services/product.service';
+import { CategoryService } from '../../services/category.service';
+import { Category } from '../../models/category';
 
 @Component({
   selector: 'app-edit-product',
@@ -20,6 +23,7 @@ export class EditProductComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private productService: ProductService,
+    private categoryService: CategoryService,
     private route: ActivatedRoute,
     private router: Router,
   ) {}
@@ -41,14 +45,24 @@ export class EditProductComponent implements OnInit {
       nonNullable: true,
       validators: [Validators.required, Validators.min(1)],
     }),
-    category: new FormControl('', { nonNullable: true }),
+    category: new FormGroup({
+      id: new FormControl(-1, {
+        nonNullable: true,
+        validators: [Validators.required],
+      }),
+    }),
     description: new FormControl(''),
   });
 
   originalProductName = '';
 
+  categories: Category[] = [];
+
   ngOnInit() {
     const productId = parseInt(this.route.snapshot.paramMap.get('id') || '');
+    this.categoryService.getCategories().subscribe((categories) => {
+      this.categories = categories;
+    });
     this.productService.getProduct(productId).subscribe((product) => {
       this.productForm.patchValue(product);
       this.originalProductName = product.name;

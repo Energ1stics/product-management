@@ -22,10 +22,19 @@ public class UpdateProductCommandHandler : IRequestHandler<UpdateProductCommand>
         );
 
         Guard.Against.Null(product);
+        Guard.Against.Null(request.Category);
+
+        var category = await _context.Categories.FirstOrDefaultAsync(
+            c => c.Id == request.Category.Id,
+            cancellationToken
+        );
+
+        Guard.Against.Null(category);
 
         product.Name = request.Name;
         product.Price = request.Price;
         product.Description = request.Description;
+        product.Category = category;
 
         await _context.SaveChangesAsync(cancellationToken);
     }

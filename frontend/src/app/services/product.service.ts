@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Product } from '../models/product';
 import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
-import { CreateProduct } from '../models/createProduct';
 
 const API_URL = 'https://localhost:5001/api/products';
 
@@ -20,7 +19,7 @@ export class ProductService {
     return this.http.get<Product>(`${API_URL}/${id}`);
   }
 
-  createProduct(product: CreateProduct): Observable<void> {
+  createProduct(product: Omit<Product, 'id'>): Observable<void> {
     return this.http.post<void>(API_URL, product);
   }
 

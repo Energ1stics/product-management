@@ -23,10 +23,10 @@ public class GetProductQueryHandler
         CancellationToken cancellationToken
     )
     {
-        var product = await _dbContext.Products.FirstOrDefaultAsync(
-            x => x.Id == request.Id,
-            cancellationToken
-        );
+        var product = await _dbContext
+            .Products.Include(p => p.Category)
+            .AsNoTracking()
+            .FirstOrDefaultAsync(p => p.Id == request.Id, cancellationToken);
 
         Guard.Against.Null(product);
 

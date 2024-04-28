@@ -18,11 +18,21 @@ public class CreateProductCommandHandler
         CancellationToken cancellationToken
     )
     {
+        Guard.Against.Null(command.Category);
+
+        var category = await _context.Categories.FirstOrDefaultAsync(
+            c => c.Id == command.Category.Id,
+            cancellationToken
+        );
+
+        Guard.Against.Null(category);
+
         var product = new Product
         {
             Name = command.Name,
             Price = command.Price,
-            Description = command.Description
+            Description = command.Description,
+            Category = category,
         };
 
         _context.Products.Add(product);
