@@ -1,0 +1,34 @@
+{
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "ng serve",
+            "type": "chrome",
+            "request": "launch",
+            "preLaunchTask": "npm: start",
+            "url": "http://localhost:4200/"
+        },
+        {
+            "name": "ng test",
+            "type": "chrome",
+            "request": "launch",
+            "preLaunchTask": "npm: test",
+            "url": "http://localhost:9876/debug.html"
+        },
+        {
+            "name": "Debug Backend",
+            "request": "launch",
+            "type": "coreclr",
+            "preLaunchTask": "build_be",
+            "program": "${workspaceFolder}/backend/src/Web/bin/Debug/net8.0/backend.Web.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/backend/src/Web",
+            "console": "integratedTerminal",
+            "serverReadyAction": {
+                "action": "openExternally",
+                "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
+            }
+        }
+    ]
+}
