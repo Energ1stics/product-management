@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { Product } from '../../models/product';
 import { ProductService } from '../../services/product.service';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-read-products',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './read-products.component.html',
   styleUrl: './read-products.component.css',
 })
