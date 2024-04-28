@@ -5,3 +5,7 @@
 th {
   text-align: start;
 }
+
+input {
+  outline: none;
+}

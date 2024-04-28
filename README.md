@@ -11,9 +11,11 @@
     -   [x] Delete product
 -   [ ] Frontend
     -   [x] List products
-    -   [ ] Add product
+    -   [x] Add product
     -   [ ] Update product
     -   [x] Delete product
+    -   [ ] Improve API Error handling
+    -   [ ] Show form errors
 -   [ ] Cleanup unused backend code from scaffolding
 
 ## Requirements
