@@ -24,7 +24,9 @@ else
 }
 
 app.UseHealthChecks("/health");
-app.UseHttpsRedirection();
+
+// TODO: Cert and activate https again
+// app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseCors(config =>
