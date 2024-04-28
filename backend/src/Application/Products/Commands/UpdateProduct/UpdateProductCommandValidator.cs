@@ -1,3 +1,4 @@
+using System.Data;
 using backend.Application.Common.Interfaces;
 
 namespace backend.Application.Products.Commands.UpdateProduct;
@@ -11,10 +12,9 @@ public class UpdateProductCommandValidator
     {
         _context = context;
 
-        RuleFor(p => p.Name)
-            .NotEmpty()
-            .MinimumLength(3)
-            .MaximumLength(50)
+        RuleFor(p => p.Name).NotEmpty().MinimumLength(3).MaximumLength(50);
+
+        RuleFor(p => p)
             .MustAsync(BeUniqueName)
             .WithMessage("'{PropertyName}' must be unique.")
             .WithErrorCode("Unique");
@@ -25,13 +25,14 @@ public class UpdateProductCommandValidator
     }
 
     public async Task<bool> BeUniqueName(
-        string name,
+        UpdateProductCommand command,
         CancellationToken cancellationToken
     )
     {
-        return await _context.Products.AllAsync(
-            p => p.Name != name,
-            cancellationToken
-        );
+        var product = await _context
+            .Products.Where(p => p.Name == command.Name)
+            .FirstOrDefaultAsync(cancellationToken);
+
+        return product == null || product.Id == command.Id;
     }
 }
