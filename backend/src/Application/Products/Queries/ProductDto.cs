@@ -1,6 +1,6 @@
 using backend.Domain.Entities;
 
-namespace backend.Application.Products.Queries.GetProducts;
+namespace backend.Application.Products.Queries;
 
 public class ProductDto
 {
