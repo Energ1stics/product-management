@@ -127,5 +127,10 @@
         }
       </tbody>
     </table>
+    @if (products.length == 0) {
+      <div class="flex w-full justify-center px-4 py-4 text-xl font-semibold">
+        No products found
+      </div>
+    }
   </div>
 </div>
