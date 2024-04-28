@@ -7,3 +7,13 @@ services:
             SA_PASSWORD: "DB-dev-123!"
         ports:
             - "1433:1433"
+    backend:
+        build: ./backend
+        ports:
+            - "5000:8080"
+        depends_on:
+            - mssql
+    frontend:
+        build: ./frontend
+        ports:
+            - "4200:4000"
