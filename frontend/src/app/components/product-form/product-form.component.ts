@@ -8,7 +8,6 @@ import {
   Validators,
 } from '@angular/forms';
 import { Category } from '../../models/category';
-import { ProductService } from '../../services/product.service';
 import { CategoryService } from '../../services/category.service';
 import { Product } from '../../models/product';
 
@@ -77,5 +76,9 @@ export class ProductFormComponent {
     }
 
     this.onSubmitEvent.emit(this.productForm.getRawValue());
+  }
+
+  reset() {
+    this.productForm.reset();
   }
 }
