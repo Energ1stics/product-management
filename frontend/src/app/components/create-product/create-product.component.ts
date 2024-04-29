@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { ProductService } from '../../services/product.service';
 import { ProductFormComponent } from '../product-form/product-form.component';
 import { Product } from '../../models/product';
@@ -12,6 +12,8 @@ import { Product } from '../../models/product';
 })
 export class CreateProductComponent {
   constructor(private productService: ProductService) {}
+
+  @ViewChild(ProductFormComponent) productForm?: ProductFormComponent;
 
   apiPending = false;
   apiError = false;
@@ -27,6 +29,7 @@ export class CreateProductComponent {
       complete: () => {
         this.apiError = false;
         this.apiPending = false;
+        this.productForm?.reset();
       },
     });
   }
