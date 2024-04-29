@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { ReadProductsComponent } from '../components/read-products/read-products.component';
-import { CreateProductComponent } from '../components/create-product/create-product.component';
+import { ReadProductsComponent } from '../read-products/read-products.component';
+import { CreateProductComponent } from '../create-product/create-product.component';
 
 @Component({
   selector: 'app-products',
