@@ -22,12 +22,16 @@
     Edit Product <i>{{ originalProduct?.name }}</i>
   </h2>
   <div class="rounded border border-slate-400 shadow-lg">
-    <app-product-form
-      [apiError]="apiError"
-      [apiPending]="apiPending"
-      [product]="originalProduct"
-      (onSubmitEvent)="onSubmit($event)"
-      [submitButtonText]="'Update'"
-    ></app-product-form>
+    @if (originalProduct) {
+      <app-product-form
+        [apiError]="apiError"
+        [apiPending]="apiPending"
+        [product]="originalProduct"
+        (onSubmitEvent)="onSubmit($event)"
+        [submitButtonText]="'Update'"
+      ></app-product-form>
+    } @else {
+      Loading...
+    }
   </div>
 </div>
