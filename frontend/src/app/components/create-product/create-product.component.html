@@ -8,33 +8,29 @@
     >
       <label for="name" class="flex gap-5">
         <span class="grow basis-1 content-center font-semibold">Name *</span>
-        @if (productForm.controls.name.touched) {
-          @if (productForm.controls.name.hasError("required")) {
-            <span class="content-center text-balance text-right text-red-500"
-              >Required</span
-            >
-          } @else if (productForm.controls.name.hasError("minlength")) {
-            <span class="content-center text-balance text-right text-red-500"
-              >Name has to be at least
+        <span class="content-center text-balance text-right text-red-500">
+          @if (productForm.controls.name.touched) {
+            @if (productForm.controls.name.hasError("required")) {
+              Required
+            } @else if (productForm.controls.name.hasError("minlength")) {
+              Name has to be at least
               {{
                 productForm.controls.name.errors?.["minlength"]?.[
                   "requiredLength"
                 ]
               }}
-              characters</span
-            >
-          } @else if (productForm.controls.name.hasError("maxlength")) {
-            <span class="content-center text-balance text-right text-red-500"
-              >Name has to be at most
+              characters
+            } @else if (productForm.controls.name.hasError("maxlength")) {
+              Name has to be at most
               {{
                 productForm.controls.name.errors?.["maxlength"]?.[
                   "requiredLength"
                 ]
               }}
-              characters</span
-            >
+              characters
+            }
           }
-        }
+        </span>
       </label>
       <input
         class="col-span-3 grow rounded border p-2"
@@ -49,23 +45,19 @@
       />
       <label for="price" class="flex justify-between gap-5">
         <span class="grow basis-1 content-center font-semibold">Price *</span>
-        @if (productForm.controls.price.touched) {
-          @if (productForm.controls.price.hasError("required")) {
-            <span class="content-center text-balance text-right text-red-500"
-              >Required</span
-            >
-          } @else if (productForm.controls.price.hasError("min")) {
-            <span class="content-center text-balance text-right text-red-500">
+        <span class="content-center text-balance text-right text-red-500">
+          @if (productForm.controls.price.touched) {
+            @if (productForm.controls.price.hasError("required")) {
+              Required
+            } @else if (productForm.controls.price.hasError("min")) {
               Minimum Price is
               {{ productForm.controls.price.errors?.["min"]?.["min"] }}
-            </span>
-          } @else if (productForm.controls.price.hasError("max")) {
-            <span class="content-center text-balance text-right text-red-500">
+            } @else if (productForm.controls.price.hasError("max")) {
               Maximum Price is
               {{ productForm.controls.price.errors?.["max"]?.["max"] }}
-            </span>
+            }
           }
-        }
+        </span>
       </label>
       <input
         class="col-span-3 grow rounded border p-2"
@@ -82,14 +74,14 @@
         <span class="grow basis-1 content-center font-semibold"
           >Category *</span
         >
-        @if (
-          productForm.controls.category.controls.id.hasError("min") &&
-          productForm.controls.category.controls.id.touched
-        ) {
-          <span class="content-center text-balance text-right text-red-500"
-            >Required</span
-          >
-        }
+        <span class="content-center text-balance text-right text-red-500">
+          @if (
+            productForm.controls.category.controls.id.hasError("min") &&
+            productForm.controls.category.controls.id.touched
+          ) {
+            Required
+          }
+        </span>
       </label>
       <div formGroupName="category" class="col-span-3 grow">
         <select
@@ -103,20 +95,22 @@
           name="category"
         >
           <option value="-1">Select Category</option>
-          <option *ngFor="let category of categories" [value]="category.id">
-            {{ category.name }}
-          </option>
+          @for (category of categories; track category) {
+            <option [value]="category.id">
+              {{ category.name }}
+            </option>
+          }
         </select>
       </div>
       <label for="description" class="flex gap-5">
         <span class="grow basis-1 content-center font-semibold"
           >Description</span
         >
-        @if (
-          productForm.controls.description.touched &&
-          productForm.controls.description.hasError("maxlength")
-        ) {
-          <span class="content-center text-balance text-right text-red-500">
+        <span class="content-center text-balance text-right text-red-500">
+          @if (
+            productForm.controls.description.touched &&
+            productForm.controls.description.hasError("maxlength")
+          ) {
             Description has to be at most
             {{
               productForm.controls.description.errors?.["maxlength"]?.[
@@ -124,8 +118,8 @@
               ]
             }}
             characters
-          </span>
-        }
+          }
+        </span>
       </label>
       <input
         class="col-span-3 grow rounded border p-2"

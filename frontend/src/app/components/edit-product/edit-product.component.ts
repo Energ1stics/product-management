@@ -43,15 +43,21 @@ export class EditProductComponent implements OnInit {
     }),
     price: new FormControl(0, {
       nonNullable: true,
-      validators: [Validators.required, Validators.min(1)],
+      validators: [
+        Validators.required,
+        Validators.min(1),
+        Validators.max(999_999_99),
+      ],
     }),
     category: new FormGroup({
       id: new FormControl(-1, {
         nonNullable: true,
-        validators: [Validators.required],
+        validators: [Validators.required, Validators.min(0)],
       }),
     }),
-    description: new FormControl(''),
+    description: new FormControl('', {
+      validators: [Validators.maxLength(500)],
+    }),
   });
 
   originalProductName = '';
