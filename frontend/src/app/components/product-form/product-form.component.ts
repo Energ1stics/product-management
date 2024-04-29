@@ -23,6 +23,7 @@ export class ProductFormComponent {
   @Input() product?: Product;
   @Input() apiPending = false;
   @Input() apiError = false;
+  @Input() submitButtonText = 'Submit';
   @Output() onSubmitEvent = new EventEmitter<Omit<Product, 'id'>>();
 
   constructor(
