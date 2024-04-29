@@ -7,7 +7,34 @@
       [formGroup]="productForm"
     >
       <label for="name" class="flex gap-5">
-        <span class="grow basis-1 content-center font-semibold">Name</span>
+        <span class="grow basis-1 content-center font-semibold">Name *</span>
+        @if (productForm.controls.name.touched) {
+          @if (productForm.controls.name.hasError("required")) {
+            <span class="content-center text-balance text-right text-red-500"
+              >Required</span
+            >
+          } @else if (productForm.controls.name.hasError("minlength")) {
+            <span class="content-center text-balance text-right text-red-500"
+              >Name has to be at least
+              {{
+                productForm.controls.name.errors?.["minlength"]?.[
+                  "requiredLength"
+                ]
+              }}
+              characters</span
+            >
+          } @else if (productForm.controls.name.hasError("maxlength")) {
+            <span class="content-center text-balance text-right text-red-500"
+              >Name has to be at most
+              {{
+                productForm.controls.name.errors?.["maxlength"]?.[
+                  "requiredLength"
+                ]
+              }}
+              characters</span
+            >
+          }
+        }
       </label>
       <input
         class="col-span-3 grow rounded border p-2"
@@ -20,8 +47,25 @@
         name="name"
         formControlName="name"
       />
-      <label for="price" class="flex gap-5">
-        <span class="grow basis-1 content-center font-semibold">Price</span>
+      <label for="price" class="flex justify-between gap-5">
+        <span class="grow basis-1 content-center font-semibold">Price *</span>
+        @if (productForm.controls.price.touched) {
+          @if (productForm.controls.price.hasError("required")) {
+            <span class="content-center text-balance text-right text-red-500"
+              >Required</span
+            >
+          } @else if (productForm.controls.price.hasError("min")) {
+            <span class="content-center text-balance text-right text-red-500">
+              Minimum Price is
+              {{ productForm.controls.price.errors?.["min"]?.["min"] }}
+            </span>
+          } @else if (productForm.controls.price.hasError("max")) {
+            <span class="content-center text-balance text-right text-red-500">
+              Maximum Price is
+              {{ productForm.controls.price.errors?.["max"]?.["max"] }}
+            </span>
+          }
+        }
       </label>
       <input
         class="col-span-3 grow rounded border p-2"
@@ -35,7 +79,17 @@
         formControlName="price"
       />
       <label for="category" class="flex gap-5">
-        <span class="grow basis-1 content-center font-semibold">Category</span>
+        <span class="grow basis-1 content-center font-semibold"
+          >Category *</span
+        >
+        @if (
+          productForm.controls.category.controls.id.hasError("min") &&
+          productForm.controls.category.controls.id.touched
+        ) {
+          <span class="content-center text-balance text-right text-red-500"
+            >Required</span
+          >
+        }
       </label>
       <div formGroupName="category" class="col-span-3 grow">
         <select
@@ -46,6 +100,7 @@
               productForm.controls.category.controls.id.errors
           }"
           formControlName="id"
+          name="category"
         >
           <option value="-1">Select Category</option>
           <option *ngFor="let category of categories" [value]="category.id">
@@ -57,6 +112,20 @@
         <span class="grow basis-1 content-center font-semibold"
           >Description</span
         >
+        @if (
+          productForm.controls.description.touched &&
+          productForm.controls.description.hasError("maxlength")
+        ) {
+          <span class="content-center text-balance text-right text-red-500">
+            Description has to be at most
+            {{
+              productForm.controls.description.errors?.["maxlength"]?.[
+                "requiredLength"
+              ]
+            }}
+            characters
+          </span>
+        }
       </label>
       <input
         class="col-span-3 grow rounded border p-2"
