@@ -2,7 +2,14 @@
   <app-header
     class="sticky top-0 z-10 max-h-16 bg-inherit shadow-lg"
   ></app-header>
-  <main class="grow px-10 pb-5">
-    <router-outlet></router-outlet>
-  </main>
+  <div class="flex">
+    <aside class="sticky top-16 self-start">
+      <div class="max-h-[calc(100vh-64px)] overflow-y-auto">
+        <app-sidenav></app-sidenav>
+      </div>
+    </aside>
+    <main class="grow px-10 pb-5">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
 </div>
