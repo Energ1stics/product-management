@@ -5,14 +5,14 @@
       routerLink="/products"
       routerLinkActive="routeActive"
       [routerLinkActiveOptions]="{ exact: true }"
-      class="[&.routeActive]:text-blue-500"
+      class="[&.routeActive]:text-blue-500 dark:[&.routeActive]:text-blue-400"
     >
       Product Management</a
     >
     <a
       routerLink="/products/edit/6"
       routerLinkActive="routeActive"
-      class="[&.routeActive]:text-blue-500"
+      class="[&.routeActive]:text-blue-500 dark:[&.routeActive]:text-blue-400"
     >
       Product 6</a
     >
@@ -23,5 +23,10 @@
         >Something Else {{ navItem }}</a
       >
     }
+    <a
+      href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=ygUMcmljayByb2xsaW5n"
+      target="_blank"
+      >Easter Egg ;&#41;
+    </a>
   </nav>
 </div>

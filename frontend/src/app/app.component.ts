@@ -4,6 +4,7 @@ import { ReadProductsComponent } from './components/read-products/read-products.
 import { CreateProductComponent } from './components/create-product/create-product.component';
 import { HeaderComponent } from './components/header/header.component';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
+import { ThemeSelectorComponent } from './components/theme-selector/theme-selector.component';
 
 @Component({
   selector: 'app-root',
@@ -14,6 +15,7 @@ import { SidenavComponent } from './components/sidenav/sidenav.component';
     CreateProductComponent,
     HeaderComponent,
     SidenavComponent,
+    ThemeSelectorComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
