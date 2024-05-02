@@ -24,7 +24,7 @@
     -   [x] Update product
     -   [x] Delete product
     -   [ ] Improve API Error handling
-    -   [ ] Show form errors
+    -   [x] Show form errors
     -   [x] Confirm product delete
 -   [x] Add category to product
 -   [ ] Cleanup unused backend code from scaffolding
